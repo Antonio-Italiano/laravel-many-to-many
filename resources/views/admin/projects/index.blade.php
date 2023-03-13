@@ -8,7 +8,7 @@
         <a href="{{ route('admin.projects.create')}}" class="btn btn-success">Added Project</a>
     </header>
 
-    <table class="table table-dark table-striped">
+    <table class="table table-light table-striped">
         <thead>
             <tr>
               <th scope="col">#</th>

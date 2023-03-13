@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -31,7 +32,8 @@ class ProjectController extends Controller
     {
         $project = new Project();
         $types = Type::orderBy('label')->get();
-        return view('admin.projects.create', compact('project', 'types'));
+        $technologies = Technology::select('id', 'label')->orderBy('id')->get();
+        return view('admin.projects.create', compact('project', 'types', 'technologies'));
         dd($types);
     }
 
@@ -93,7 +95,8 @@ class ProjectController extends Controller
     {
         // dd($project);
         $types = Type::orderBy('label')->get();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::select('id', 'label')->orderBy('id')->get();
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**

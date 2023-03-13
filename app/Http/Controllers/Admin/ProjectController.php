@@ -48,14 +48,16 @@ class ProjectController extends Controller
             'description' => 'required|string',
             'imag' => 'nullable|image|mimes:jpeg,jpg,png',
             'url' => 'nullable|url',
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'nullable|exists:technologies,id',
         ], [
             'title.required' => 'The title is mandatory',
             'title.unique' => "The name $request->title is already present",
             'title.max' => 'Exceeded the maximum number of characters :max',
             'description.required' => 'Description is required',
             'image.mimes' => 'accepted extensions are :mimes',
-            'type_id' => 'categoria non valida'
+            'type_id' => 'categoria non valida',
+            'technologies' => 'campo inserito errato',
         ]);
 
         $data = $request->all();
@@ -74,6 +76,10 @@ class ProjectController extends Controller
         $project->fill($data);
 
         $project->save();
+
+        //relazione tra project con le technologies
+        if(Arr::exists($data, 'technologies')) $project->technologies()->attach($data['technologies']);
+        // $project->technologies()->attach($data['technologies']);
         
         return to_route('admin.projects.show', $project->id)
             ->with('type', 'success')
@@ -93,10 +99,12 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        // dd($project);
+        // dd($project); 
         $types = Type::orderBy('label')->get();
         $technologies = Technology::select('id', 'label')->orderBy('id')->get();
-        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
+        $project_technologies = $project->technologies->pluck('id')->toArray();
+        // dd($project_technologies);
+        return view('admin.projects.edit', compact('project', 'types', 'technologies', 'project_technologies'));
     }
 
     /**
@@ -111,14 +119,18 @@ class ProjectController extends Controller
             'description' => 'required|string',
             'imag' => 'nullable|image|mimes:jpeg,jpg,png',
             'url' => 'nullable|url',
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'nullable|exists:technologies,id',
+
         ], [
             'title.required' => 'The title is mandatory',
             'title.unique' => "The name $request->title is already present",
             'title.max' => 'Exceeded the maximum number of characters :max',
             'description.required' => 'Description is required',
             'image.mimes' => 'accepted extensions are :mimes',
-            'type_id' => 'categoria non valida'
+            'type_id' => 'categoria non valida',
+            'technologies' => 'campo inserito errato',
+
         ]);
         
         $data = $request->all();
@@ -138,6 +150,11 @@ class ProjectController extends Controller
 
         $project->update($data);
 
+
+        //assegno le technologies
+        if(Arr::exists($data, 'technologies')) $project->technologies()->sync($data['technologies']);
+        else if(count($project->technologies)) $project->technologies()->detach();
+
         return to_route('admin.projects.show', $project->id)
             ->with('type', 'success')
             ->with('message', 'Change made successfully');
@@ -150,6 +167,8 @@ class ProjectController extends Controller
     {
         if($project->image) Storage::delete($project->image);
         
+        if(count($project->technologies)) $project->technologies()->detach();
+
         $project->delete();
 
         return to_route('admin.projects.index')

@@ -15,6 +15,7 @@
               <th scope="col">Title</th>
               <th scope="col">Type</th>
               <th scope="col">Published</th>
+              <th scope="col">Technologies</th>              
               <th scope="col">Description</th>
               {{-- <th scope="col">Image</th> --}}
               {{-- <th scope="col">Slug</th> --}}
@@ -29,7 +30,7 @@
                 <th scope="row">{{$project->id}}</th>
                 <td>{{$project->title}}</td>
                 <td>{{$project->type?->label}}</td>
-                <th>
+                <td>
                     <form action="{{route('admin.projects.toggle', $project->id) }}" method="POST">
                         @method('PATCH')
                         @csrf
@@ -38,7 +39,14 @@
                             <i class="fas fa-toggle-{{$project->is_published ? 'on' : 'off' }} {{ $project->is_published ? 'text-success' : 'text-danger' }}"></i>
                         </button>
                     </form>
-                </th>
+                </td>
+                <td>
+                    @forelse ($project->technologies as $technology)
+                        <span class="badge rounded-pill me-2 text-bg-{{ $technology->color }}">{{ $technology->label }}</span>
+                    @empty
+                        -
+                    @endforelse
+                </td>                
                 <td>{{$project->description}}</td>
                 {{-- <td>{{$project->image}}</td> --}}
                 {{-- <td>{{$project->slug}}</td> --}}

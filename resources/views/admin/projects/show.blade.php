@@ -18,6 +18,16 @@
         <p>{{$project->description}}</p>
         <div><strong> state: </strong> {{$project->is_published ? 'Published' : 'Draft'}}</div>
         <div><strong> type: </strong> {{$project->type?->label}}</div>
+        <div>
+            <strong> technology: </strong> 
+            @forelse ($project->technologies as $technology)
+                {{$technology->label}} @if (!$loop->last)
+                  , 
+                @else 
+                  .
+                @endif @empty Nessuno            
+            @endforelse
+        </div>
     </div>
     <hr>
     <div class="d-flex justify-content-between pb-3">

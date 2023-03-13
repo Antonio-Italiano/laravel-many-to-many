@@ -21,7 +21,7 @@ class TechnologySeeder extends Seeder
             ['label' => 'VUE', 'color' => 'success'],
             ['label' => 'PHP', 'color' => 'primary'],
             ['label' => 'SQL', 'color' => 'secondary'],
-            ['label' => 'SASS', 'color' => 'danger-emphasis'],
+            ['label' => 'SASS', 'color' => 'light'],
         ];
         
         foreach($technologies as $technology) {

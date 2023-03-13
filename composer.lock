@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6561c520a5395a1dd5115e64901586a8",
+    "content-hash": "1c78f4219c7f67f35cce094476ba4966",
     "packages": [
         {
             "name": "brick/math",
@@ -980,6 +980,57 @@
                 }
             ],
             "time": "2021-10-07T12:57:01+00:00"
+        },
+        {
+            "name": "lanciweb/laravel-make-crud",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LanciWeb/laravel-make-crud.git",
+                "reference": "d5630939ddab87b73611b877308e110cc397e307"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LanciWeb/laravel-make-crud/zipball/d5630939ddab87b73611b877308e110cc397e307",
+                "reference": "d5630939ddab87b73611b877308e110cc397e307",
+                "shasum": ""
+            },
+            "require": {
+                "lanciweb/laravel-make-view": "^1.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0"
+            },
+            "type": "laravel-package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LanciWeb\\LaravelMakeCrud\\LaravelMakeCrudServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LanciWeb\\LaravelMakeCrud\\": "src/",
+                    "LanciWeb\\LaravelMakeCrud\\Commands\\": "src/Commands/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Lancellotti",
+                    "email": "lancellotti.marco@yahoo.it"
+                }
+            ],
+            "description": "A Laravel Package that allows creation of Model, Migration, Seeder, Views, Routes and resource controller for CRUD operations.",
+            "support": {
+                "issues": "https://github.com/LanciWeb/laravel-make-crud/issues",
+                "source": "https://github.com/LanciWeb/laravel-make-crud/tree/v1.0.3"
+            },
+            "time": "2023-03-10T08:14:31+00:00"
         },
         {
             "name": "lanciweb/laravel-make-view",

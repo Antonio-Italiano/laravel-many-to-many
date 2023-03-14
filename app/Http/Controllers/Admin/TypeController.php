@@ -49,9 +49,9 @@ class TypeController extends Controller
 
         $type->save();
 
-        return to_route('admin.types.index');
-        // ->whit('type', 'success')
-        // ->whit('message', 'type creato con successo');
+        return to_route('admin.types.index')
+        ->with('type', 'success')
+        ->with('message', 'type creato con successo');;
     }
 
     /**
@@ -90,9 +90,9 @@ class TypeController extends Controller
         $type->update($data);
 
 
-        return to_route('admin.types.index');
-        // ->whit('type', 'success')
-        // ->whit('message', 'type modificata con successo');
+        return to_route('admin.types.index')
+        ->with('type', 'success')
+        ->with('message', 'type modificata con successo');
     }
 
     /**
@@ -102,8 +102,8 @@ class TypeController extends Controller
     {
         $type->delete();
      
-        return to_route('admin.types.index', $type->id);
-            // ->whit('type', 'success')
-            // ->whit('message', "Type $type->label eliminato con successo")
+        return to_route('admin.types.index', $type->id)
+            ->whit('type', 'success')
+            ->whit('message', "Type $type->label eliminato con successo");
     }
 }

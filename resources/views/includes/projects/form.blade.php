@@ -115,13 +115,13 @@
         </div>
       </div>
 
-      {{-- IMAGE PREVIEW --}}
+      {{-- IMAGE PREVIEW --}} 
       <div class="col-4">
         <div class="mb-5">
-          <img src="{{ old('image', $project->image ?? 'https://marcolanci.it/utils/placeholder.jpg') }}" id="preview"
+          <img src="{{ old('image', asset('storage/' . $project->image)) }}" id="image-preview"
             alt="preview" class="img-fluid" width="100">
         </div>
-      </div>   
+      </div>  
     </div>
 
     {{-- Technology --}}
@@ -154,4 +154,5 @@
 
 @section('scripts')
  @vite(['resources/js/preview-slag.js'])    
+ {{-- @vite(['resources/js/preview-img.js'])     --}}
 @endsection

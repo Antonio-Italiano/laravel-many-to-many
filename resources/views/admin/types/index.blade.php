@@ -25,7 +25,7 @@
                 <td>{{$type->updated_at}}</td>
                 <td>
                     {{-- BUTTON  --}}
-                    <div class="d-flex">
+                    <div class="d-flex justify-content-end">
                         <form action="{{ route('admin.types.destroy', $type->id) }}" method="POST" class="delete-form"
                             data-name="{{ $type->title }}">
                             @csrf

@@ -151,8 +151,3 @@
   </div>
   
 </form>
-
-@section('scripts')
- @vite(['resources/js/preview-slag.js'])    
- {{-- @vite(['resources/js/preview-img.js'])     --}}
-@endsection

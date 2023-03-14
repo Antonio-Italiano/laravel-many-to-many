@@ -53,7 +53,6 @@
                 <td>{{$project->url}}</td>
                 <td>{{$project->updated_at}}</td>
                 <td>
-
                     {{-- BUTTON  --}}
                     <div class="d-flex">
                         <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" class="delete-form"
@@ -65,7 +64,6 @@
                         <a href="{{ route('admin.projects.show', $project->id)}}" class="btn btn-primary mx-2">View</a>
                         <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-success">Edit</a>
                     </div>
-
                 </td>
             </tr>
             @empty
@@ -74,6 +72,12 @@
             </tr>
                 
             @endforelse
-          </tbody>
+        </tbody>
     </table>    
+    <div class="d-flex justify-content-end"> 
+        {{-- facciamo un controllo che non lo fa rompere se ci sono pochi elementi --}}
+        @if($projects->hasPages())
+            {{ $projects->links() }}
+        @endif
+    </div>
 @endsection

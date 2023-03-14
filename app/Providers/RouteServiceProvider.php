@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -24,6 +25,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        $this->configureRateLimiting();
+        Paginator::useBootstrap();
+
         $this->configureRateLimiting();
 
         $this->routes(function () {
